@@ -952,6 +952,45 @@
             }
         }
     </style>
+    <style>
+        /* Stabilize mobile page-end scrolling and dynamic browser toolbars. */
+        html {
+            background: var(--ink);
+            overscroll-behavior-y: none;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            overflow-x: clip;
+            touch-action: pan-y;
+        }
+
+        footer {
+            overflow: hidden;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                height: 100svh;
+                min-height: 650px;
+            }
+
+            .experience {
+                background-attachment: scroll;
+            }
+        }
+
+        @supports (height: 100dvh) {
+            .nav-links {
+                height: 100dvh;
+            }
+        }
+    </style>
 </head>
 
 <body>
