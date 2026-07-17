@@ -991,6 +991,29 @@
             }
         }
     </style>
+    <style>
+        @media (max-width: 900px) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .header,
+            .header.scrolled {
+                background: rgba(13, 13, 12, .98);
+                -webkit-backdrop-filter: none;
+                backdrop-filter: none;
+                transition: none;
+            }
+
+            .slide {
+                transform: none;
+            }
+
+            .slide.active {
+                transform: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
