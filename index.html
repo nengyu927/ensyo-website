@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="燄匠和牛燒肉，以職人火候、嚴選和牛與細緻款待，打造值得紀念的燒肉體驗。">
+    <title>燄匠和牛燒肉｜職人火候・極上款待</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        :root {
+            --ink: #0d0d0c;
+            --paper: #f3eee5;
+            --cream: #e8dfd0;
+            --gold: #c99a54;
+            --red: #8e2f23;
+            --line: rgba(232, 223, 208, .18);
+            --max: 1180px
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 92px
+        }
+
+        body {
+            font-family: "Noto Sans TC", sans-serif;
+            background: var(--ink);
+            color: var(--paper);
+            line-height: 1.7;
+            overflow-x: hidden
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        button {
+            font: inherit
+        }
+
+        img {
+            display: block;
+            width: 100%
+        }
+
+        .container {
+            width: min(var(--max), calc(100% - 40px));
+            margin: auto
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: .76rem;
+            font-weight: 700;
+            letter-spacing: .25em;
+            text-transform: uppercase
+        }
+
+        .section-head {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: end;
+            gap: 40px;
+            margin-bottom: 44px
+        }
+
+        .section-head h2 {
+            font: 700 clamp(2rem, 4vw, 3.6rem)/1.25 "Noto Serif TC", serif;
+            letter-spacing: .06em
+        }
+
+        .section-head p {
+            color: #aaa49b;
+            max-width: 560px
+        }
+
+        .topbar {
+            background: var(--red);
+            font-size: .78rem;
+            letter-spacing: .12em;
+            text-align: center;
+            padding: 7px 16px
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: .3s
+        }
+
+        .header.scrolled {
+            background: rgba(13, 13, 12, .92);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 1px 0 var(--line)
+        }
+
+        .nav {
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .brand-mark {
+            display: grid;
+            place-items: center;
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font: 700 1.3rem "Noto Serif TC"
+        }
+
+        .brand-text strong {
+            display: block;
+            font: 700 1.05rem "Noto Serif TC";
+            letter-spacing: .18em
+        }
+
+        .brand-text small {
+            display: block;
+            color: #aaa;
+            font-size: .58rem;
+            letter-spacing: .16em
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+            font-size: .88rem
+        }
+
+        .nav-links a {
+            position: relative
+        }
+
+        .nav-links a:not(.nav-cta)::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 100%;
+            bottom: -7px;
+            height: 1px;
+            background: var(--gold);
+            transition: .25s
+        }
+
+        .nav-links a:hover::after {
+            right: 0
+        }
+
+        .nav-cta,
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            background: var(--gold);
+            color: #17130e;
+            padding: 12px 20px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            border: 1px solid var(--gold);
+            transition: .25s
+        }
+
+        .nav-cta:hover,
+        .btn:hover {
+            background: #e0b978;
+            border-color: #e0b978;
+            transform: translateY(-2px)
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: 0;
+            color: #fff;
+            font-size: 1.35rem;
+            cursor: pointer
+        }
+
+        .hero {
+            position: relative;
+            height: 100svh;
+            min-height: 680px;
+            overflow: hidden
+        }
+
+        .slides,
+        .slide {
+            position: absolute;
+            inset: 0
+        }
+
+        .slide {
+            opacity: 0;
+            transform: scale(1.035);
+            transition: opacity 1s, transform 6s;
+            background-position: center;
+            background-size: cover
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1)
+        }
+
+        .slide::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(0, 0, 0, .88) 0%, rgba(0, 0, 0, .45) 48%, rgba(0, 0, 0, .18)), linear-gradient(0deg, rgba(13, 13, 12, .8), transparent 40%)
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 92px
+        }
+
+        .hero-kicker {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: var(--gold);
+            font-weight: 600;
+            letter-spacing: .24em
+        }
+
+        .hero-kicker::before {
+            content: "";
+            width: 42px;
+            height: 1px;
+            background: var(--gold)
+        }
+
+        .hero h1 {
+            font: 900 clamp(3rem, 8vw, 6.7rem)/1.08 "Noto Serif TC", serif;
+            letter-spacing: .08em;
+            margin: 22px 0
+        }
+
+        .hero h1 span {
+            display: block;
+            color: var(--gold)
+        }
+
+        .hero-copy {
+            max-width: 560px;
+            color: #d2cec7;
+            font-size: clamp(.96rem, 1.5vw, 1.12rem)
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 14px;
+            margin-top: 34px
+        }
+
+        .btn.outline {
+            color: #fff;
+            background: transparent;
+            border-color: rgba(255, 255, 255, .45)
+        }
+
+        .btn.outline:hover {
+            border-color: var(--gold);
+            color: var(--gold)
+        }
+
+        .slider-ui {
+            position: absolute;
+            z-index: 5;
+            right: max(20px, calc((100vw - var(--max))/2));
+            bottom: 42px;
+            display: flex;
+            align-items: center;
+            gap: 18px
+        }
+
+        .slider-ui button {
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(255, 255, 255, .35);
+            background: rgba(0, 0, 0, .2);
+            color: #fff;
+            cursor: pointer;
+            transition: .2s
+        }
+
+        .slider-ui button:hover {
+            border-color: var(--gold);
+            color: var(--gold)
+        }
+
+        .counter {
+            font-family: serif;
+            letter-spacing: .15em
+        }
+
+        .counter b {
+            color: var(--gold);
+            font-size: 1.25rem
+        }
+
+        .progress {
+            width: 90px;
+            height: 1px;
+            background: #666
+        }
+
+        .progress span {
+            display: block;
+            width: 0;
+            height: 100%;
+            background: var(--gold)
+        }
+
+        .progress.play span {
+            animation: progress 5s linear
+        }
+
+        .stats {
+            position: relative;
+            z-index: 6;
+            margin-top: -1px;
+            background: #151513;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr)
+        }
+
+        .stat {
+            padding: 30px;
+            border-right: 1px solid var(--line)
+        }
+
+        .stat:first-child {
+            border-left: 1px solid var(--line)
+        }
+
+        .stat strong {
+            display: block;
+            color: var(--gold);
+            font: 700 1.55rem "Noto Serif TC"
+        }
+
+        .stat span {
+            color: #8f8a82;
+            font-size: .78rem;
+            letter-spacing: .08em
+        }
+
+        .about {
+            padding: 130px 0
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 80px;
+            align-items: center
+        }
+
+        .about-image {
+            position: relative
+        }
+
+        .about-image img {
+            height: 600px;
+            object-fit: cover;
+            filter: saturate(.75)
+        }
+
+        .about-image::before {
+            content: "";
+            position: absolute;
+            inset: -18px 18px 18px -18px;
+            border: 1px solid rgba(201, 154, 84, .45);
+            z-index: -1
+        }
+
+        .seal {
+            position: absolute;
+            right: -34px;
+            bottom: 45px;
+            width: 118px;
+            height: 118px;
+            border-radius: 50%;
+            background: var(--red);
+            display: grid;
+            place-items: center;
+            text-align: center;
+            font: 700 .82rem/1.5 "Noto Serif TC";
+            letter-spacing: .14em;
+            box-shadow: 0 10px 35px #000
+        }
+
+        .about-copy h2 {
+            font: 700 clamp(2rem, 4vw, 3.5rem)/1.3 "Noto Serif TC";
+            margin: 15px 0 28px
+        }
+
+        .about-copy p {
+            color: #aaa49b;
+            margin-bottom: 18px
+        }
+
+        .signature {
+            font: 700 1.25rem "Noto Serif TC";
+            color: var(--gold);
+            margin-top: 30px
+        }
+
+        .features {
+            padding: 120px 0;
+            background: #151513
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line)
+        }
+
+        .feature {
+            background: #151513;
+            padding: 42px 34px;
+            min-height: 310px;
+            transition: .3s
+        }
+
+        .feature:hover {
+            background: #1d1b18
+        }
+
+        .feature .number {
+            font-family: serif;
+            color: #5f5546;
+            font-size: .9rem
+        }
+
+        .feature i {
+            display: block;
+            color: var(--gold);
+            font-size: 2rem;
+            margin: 45px 0 22px
+        }
+
+        .feature h3 {
+            font: 700 1.35rem "Noto Serif TC";
+            letter-spacing: .08em;
+            margin-bottom: 14px
+        }
+
+        .feature p {
+            color: #918c84;
+            font-size: .92rem
+        }
+
+        .menu-section {
+            padding: 130px 0
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px
+        }
+
+        .menu-card {
+            position: relative;
+            height: 450px;
+            overflow: hidden
+        }
+
+        .menu-card img {
+            height: 100%;
+            object-fit: cover;
+            transition: .6s
+        }
+
+        .menu-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(0, 0, 0, .92), transparent 68%)
+        }
+
+        .menu-card:hover img {
+            transform: scale(1.06)
+        }
+
+        .menu-info {
+            position: absolute;
+            z-index: 2;
+            left: 28px;
+            right: 28px;
+            bottom: 26px
+        }
+
+        .menu-info small {
+            color: var(--gold);
+            letter-spacing: .18em
+        }
+
+        .menu-info h3 {
+            font: 700 1.6rem "Noto Serif TC";
+            margin: 5px 0
+        }
+
+        .menu-info p {
+            color: #bbb;
+            font-size: .86rem
+        }
+
+        .experience {
+            position: relative;
+            padding: 150px 0;
+            background: url('./img/6.jpg') center/cover fixed
+        }
+
+        .experience::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(7, 7, 6, .78)
+        }
+
+        .experience .container {
+            position: relative;
+            text-align: center
+        }
+
+        .experience h2 {
+            font: 700 clamp(2.2rem, 5vw, 4.4rem) "Noto Serif TC";
+            margin: 16px 0 22px
+        }
+
+        .experience p {
+            max-width: 620px;
+            margin: 0 auto 32px;
+            color: #c7c2b9
+        }
+
+        .news-section {
+            padding: 120px 0
+        }
+
+        .news-list {
+            border-top: 1px solid var(--line)
+        }
+
+        .news-item {
+            display: grid;
+            grid-template-columns: 140px 110px 1fr 30px;
+            align-items: center;
+            gap: 24px;
+            padding: 24px 8px;
+            border-bottom: 1px solid var(--line);
+            transition: .25s
+        }
+
+        .news-item:hover {
+            padding-left: 18px;
+            background: #131311
+        }
+
+        .news-item time {
+            color: #8f8a82
+        }
+
+        .tag {
+            border: 1px solid #594d3d;
+            color: var(--gold);
+            text-align: center;
+            font-size: .72rem;
+            padding: 4px
+        }
+
+        .news-item i {
+            color: var(--gold)
+        }
+
+        .contact {
+            background: var(--paper);
+            color: #181713;
+            padding: 110px 0
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px
+        }
+
+        .contact h2 {
+            font: 700 clamp(2rem, 4vw, 3.5rem) "Noto Serif TC";
+            margin: 14px 0 22px
+        }
+
+        .contact p {
+            color: #68645d
+        }
+
+        .contact-details {
+            margin-top: 32px;
+            display: grid;
+            gap: 15px
+        }
+
+        .contact-details div {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start
+        }
+
+        .contact-details i {
+            color: var(--red);
+            margin-top: 6px;
+            width: 18px
+        }
+
+        .reservation {
+            background: #fff;
+            padding: 34px;
+            box-shadow: 0 15px 50px rgba(65, 49, 25, .1)
+        }
+
+        .reservation h3 {
+            font: 700 1.45rem "Noto Serif TC";
+            margin-bottom: 20px
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px
+        }
+
+        .field {
+            margin-bottom: 14px
+        }
+
+        .field label {
+            display: block;
+            font-size: .78rem;
+            color: #68645d;
+            margin-bottom: 6px
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            padding: 13px 12px;
+            border: 1px solid #d7d0c4;
+            background: #faf9f6;
+            color: #222
+        }
+
+        .reservation .btn {
+            width: 100%;
+            border: 0;
+            cursor: pointer;
+            margin-top: 5px
+        }
+
+        .form-note {
+            display: none;
+            color: #48704d;
+            text-align: center;
+            margin-top: 12px;
+            font-size: .85rem
+        }
+
+        .footer {
+            padding: 58px 0 26px
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 36px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .socials {
+            display: flex;
+            gap: 10px
+        }
+
+        .socials a {
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--line);
+            display: grid;
+            place-items: center;
+            color: #aaa;
+            transition: .2s
+        }
+
+        .socials a:hover {
+            border-color: var(--gold);
+            color: var(--gold)
+        }
+
+        .copyright {
+            display: flex;
+            justify-content: space-between;
+            color: #69655e;
+            font-size: .75rem;
+            padding-top: 24px
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: .8s
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none
+        }
+
+        @keyframes progress {
+            to {
+                width: 100%
+            }
+        }
+
+        @media(max-width:900px) {
+            .nav-links {
+                position: fixed;
+                inset: 0 0 auto auto;
+                width: min(330px, 85vw);
+                height: 100vh;
+                background: #141412;
+                padding: 110px 34px;
+                flex-direction: column;
+                align-items: flex-start;
+                transform: translateX(100%);
+                transition: .3s
+            }
+
+            .nav-links.open {
+                transform: none
+            }
+
+            .menu-btn {
+                display: block;
+                z-index: 2
+            }
+
+            .hero h1 {
+                font-size: clamp(3rem, 12vw, 5rem)
+            }
+
+            .section-head,
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr
+            }
+
+            .section-head {
+                gap: 14px
+            }
+
+            .about-grid {
+                gap: 50px
+            }
+
+            .about-image img {
+                height: 460px
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .stat:nth-child(3) {
+                border-left: 1px solid var(--line)
+            }
+
+            .feature-grid,
+            .menu-grid {
+                grid-template-columns: 1fr
+            }
+
+            .feature {
+                min-height: 0
+            }
+
+            .menu-card {
+                height: 380px
+            }
+
+            .experience {
+                background-attachment: scroll
+            }
+
+            .contact-grid {
+                gap: 50px
+            }
+        }
+
+        @media(max-width:600px) {
+            .container {
+                width: min(100% - 28px, var(--max))
+            }
+
+            .topbar {
+                font-size: .65rem
+            }
+
+            .brand-text small {
+                display: none
+            }
+
+            .hero {
+                min-height: 650px
+            }
+
+            .hero-content {
+                justify-content: flex-end;
+                padding-bottom: 120px
+            }
+
+            .hero h1 {
+                font-size: 2.9rem
+            }
+
+            .hero-copy {
+                font-size: .9rem
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+                width: 210px
+            }
+
+            .slider-ui {
+                left: 14px;
+                right: auto;
+                bottom: 25px
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .stat {
+                padding: 20px 16px
+            }
+
+            .about,
+            .features,
+            .menu-section,
+            .news-section {
+                padding: 85px 0
+            }
+
+            .about-image img {
+                height: 390px
+            }
+
+            .seal {
+                right: -6px;
+                width: 95px;
+                height: 95px
+            }
+
+            .news-item {
+                grid-template-columns: 1fr auto;
+                gap: 7px 15px
+            }
+
+            .news-item .tag {
+                grid-column: 2
+            }
+
+            .news-item p {
+                grid-column: 1/-1
+            }
+
+            .news-item i {
+                display: none
+            }
+
+            .form-row {
+                grid-template-columns: 1fr
+            }
+
+            .reservation {
+                padding: 24px
+            }
+
+            .footer-top,
+            .copyright {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 22px
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            html {
+                scroll-behavior: auto
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header" id="header">
+        <div class="topbar">線上訂位享限定迎賓小品・即日起開放 30 日內預約</div>
+        <nav class="nav container" aria-label="主要導覽">
+            <a class="brand" href="#home" aria-label="燄匠和牛燒肉首頁"><span class="brand-mark">燄</span><span
+                    class="brand-text"><strong>燄匠和牛燒肉</strong><small>ENSHO WAGYU YAKINIKU</small></span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">品牌故事</a></li>
+                <li><a href="#craft">職人堅持</a></li>
+                <li><a href="#menu">嚴選菜單</a></li>
+                <li><a href="#news">最新消息</a></li>
+                <li><a class="nav-cta" href="#reserve">立即訂位</a></li>
+            </ul>
+            <button class="menu-btn" id="menuBtn" aria-label="開啟選單" aria-expanded="false"><i
+                    class="fa-solid fa-bars"></i></button>
+        </nav>
+    </header>
+    <main>
+        <section class="hero" id="home" aria-label="品牌主視覺">
+            <div class="slides">
+                <div class="slide active" style="background-image:url('./img/3.jpg')"></div>
+                <div class="slide" style="background-image:url('./img/4.jpg')"></div>
+                <div class="slide" style="background-image:url('./img/5.jpg')"></div>
+                <div class="slide" style="background-image:url('./img/6.jpg')"></div>
+                <div class="slide" style="background-image:url('./img/7.jpg')"></div>
+            </div>
+            <div class="hero-content container">
+                <p class="hero-kicker">PREMIUM WAGYU DINING</p>
+                <h1>以火為筆，<span>刻畫極上風味</span></h1>
+                <p class="hero-copy">嚴選日本和牛與當令食材，讓職人掌握每一分火候。從第一口到最後一道，都是我們對款待的認真。</p>
+                <div class="hero-actions"><a class="btn" href="#reserve">預約一席美味 <i
+                            class="fa-solid fa-arrow-right"></i></a><a class="btn outline" href="#menu">探索嚴選菜單</a></div>
+            </div>
+            <div class="slider-ui"><button id="prev" aria-label="上一張"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="counter"><b id="current">01</b> / 05</div>
+                <div class="progress play" id="progress"><span></span></div><button id="next" aria-label="下一張"><i
+                        class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </section>
+        <div class="stats">
+            <div class="stats-grid container">
+                <div class="stat"><strong>A5</strong><span>日本頂級和牛</span></div>
+                <div class="stat"><strong>30+</strong><span>產地直送食材</span></div>
+                <div class="stat"><strong>12 年</strong><span>職人燒肉經驗</span></div>
+                <div class="stat"><strong>4.9</strong><span>賓客平均評價</span></div>
+            </div>
+        </div>
+        <section class="about" id="about">
+            <div class="about-grid container">
+                <div class="about-image reveal"><img src="./img/7.jpg" alt="職人專注炙燒料理" loading="lazy">
+                    <div class="seal">職人<br>炙燒之道</div>
+                </div>
+                <div class="about-copy reveal">
+                    <p class="eyebrow">Our Philosophy</p>
+                    <h2>一道燒肉，<br>一場關於火候的修行</h2>
+                    <p>燄匠相信，最好的滋味源自對細節的尊重。我們走訪產地、挑選油花與肉質平衡的和牛，依據每個部位調整厚度與熟度。</p>
+                    <p>從炭火溫度、翻面時機到佐料比例，專人桌邊代烤，讓每一口都在最完美的瞬間抵達。</p>
+                    <div class="signature">料理長　林 崢</div>
+                </div>
+            </div>
+        </section>
+        <section class="features" id="craft">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <p class="eyebrow">The Ensyo Standard</p>
+                        <h2>我們堅持的<br>三件事</h2>
+                    </div>
+                    <p>真正的高級，不是繁複堆疊，而是每個環節都恰到好處。從產地到餐桌，我們以一致標準守護風味。</p>
+                </div>
+                <div class="feature-grid">
+                    <article class="feature reveal"><span class="number">01 / SELECT</span><i
+                            class="fa-solid fa-award"></i>
+                        <h3>產地嚴選</h3>
+                        <p>與日本認證牧場長期合作，依油花、香氣與口感精準選肉，保留每個部位的個性。</p>
+                    </article>
+                    <article class="feature reveal"><span class="number">02 / CRAFT</span><i
+                            class="fa-solid fa-fire-flame-curved"></i>
+                        <h3>職人火候</h3>
+                        <p>由專業服務團隊桌邊代烤，以精準節奏鎖住肉汁，呈現和牛最動人的熟成香氣。</p>
+                    </article>
+                    <article class="feature reveal"><span class="number">03 / HOSPITALITY</span><i
+                            class="fa-solid fa-hand-sparkles"></i>
+                        <h3>細緻款待</h3>
+                        <p>舒適座席、流暢節奏與貼心服務，為聚會、紀念日與商務餐敘留下從容餘裕。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="menu-section" id="menu">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <p class="eyebrow">Signature Selection</p>
+                        <h2>招牌嚴選</h2>
+                    </div>
+                    <p>依當日到貨與最佳賞味狀態調整內容，讓每次造訪都有熟悉的品質與新的驚喜。</p>
+                </div>
+                <div class="menu-grid">
+                    <article class="menu-card reveal"><img src="./img/3.jpg" alt="炭火燒肉拼盤" loading="lazy">
+                        <div class="menu-info"><small>SIGNATURE 01</small>
+                            <h3>極上和牛盛合</h3>
+                            <p>每日精選五款稀少部位，一次品味不同油脂與肉香。</p>
+                        </div>
+                    </article>
+                    <article class="menu-card reveal"><img src="./img/4.jpg" alt="職人炭火炙燒" loading="lazy">
+                        <div class="menu-info"><small>SIGNATURE 02</small>
+                            <h3>職人炙燒套餐</h3>
+                            <p>循序漸進的七道體驗，由淡雅至濃郁完整呈現。</p>
+                        </div>
+                    </article>
+                    <article class="menu-card reveal"><img src="./img/5.jpg" alt="多人共享燒肉" loading="lazy">
+                        <div class="menu-info"><small>SIGNATURE 03</small>
+                            <h3>豐盛共享宴</h3>
+                            <p>為親友聚會精心搭配，兼顧份量、風味與歡聚節奏。</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="experience">
+            <div class="container reveal">
+                <p class="eyebrow">A Table Worth Remembering</p>
+                <h2>把重要的時刻，<br>留給值得的味道</h2>
+                <p>無論是久違相聚、重要慶祝或商務宴請，燄匠都準備好一席恰到好處的款待。</p><a class="btn" href="#reserve">立即預約 <i
+                        class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </section>
+        <section class="news-section" id="news">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <p class="eyebrow">News & Events</p>
+                        <h2>最新消息</h2>
+                    </div>
+                    <p>掌握季節限定菜單、會員禮遇與品牌活動。</p>
+                </div>
+                <div class="news-list"><a class="news-item reveal" href="#reserve"><time>2026.07.15</time><span
+                            class="tag">季節限定</span>
+                        <p>盛夏海陸饗宴登場｜和牛 × 北海道海膽限定套餐</p><i class="fa-solid fa-arrow-right"></i>
+                    </a><a class="news-item reveal" href="#reserve"><time>2026.07.01</time><span class="tag">會員禮遇</span>
+                        <p>燄匠會員專屬｜壽星招待極上和牛一品</p><i class="fa-solid fa-arrow-right"></i>
+                    </a><a class="news-item reveal" href="#reserve"><time>2026.06.20</time><span class="tag">品牌消息</span>
+                        <p>企業包場與商務餐敘專案，現正接受預約</p><i class="fa-solid fa-arrow-right"></i>
+                    </a></div>
+            </div>
+        </section>
+        <section class="contact" id="reserve">
+            <div class="contact-grid container">
+                <div class="reveal">
+                    <p class="eyebrow">Reservation</p>
+                    <h2>為您保留<br>一席美好時光</h2>
+                    <p>線上送出訂位需求後，服務人員將於營業時間內與您確認。六位以上或包場需求，歡迎來電洽詢。</p>
+                    <div class="contact-details">
+                        <div><i class="fa-solid fa-location-dot"></i><span>台北市信義區松仁路 88 號 2 樓</span></div>
+                        <div><i class="fa-solid fa-phone"></i><span>02-2345-6789</span></div>
+                        <div><i class="fa-regular fa-clock"></i><span>午餐 11:30–14:30<br>晚餐 17:30–22:30</span></div>
+                    </div>
+                </div>
+                <form class="reservation reveal" id="bookingForm">
+                    <h3>線上訂位需求</h3>
+                    <div class="form-row">
+                        <div class="field"><label for="name">姓名</label><input id="name" required placeholder="王小明">
+                        </div>
+                        <div class="field"><label for="phone">聯絡電話</label><input id="phone" type="tel" required
+                                placeholder="0912-345-678"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="field"><label for="date">用餐日期</label><input id="date" type="date" required></div>
+                        <div class="field"><label for="guests">用餐人數</label><select id="guests">
+                                <option>2 位</option>
+                                <option>3 位</option>
+                                <option>4 位</option>
+                                <option>5 位</option>
+                                <option>6 位以上</option>
+                            </select></div>
+                    </div>
+                    <div class="field"><label for="occasion">用餐需求</label><select id="occasion">
+                            <option>一般用餐</option>
+                            <option>生日慶祝</option>
+                            <option>紀念日</option>
+                            <option>商務餐敘</option>
+                            <option>其他</option>
+                        </select></div><button class="btn" type="submit">送出訂位需求 <i
+                            class="fa-solid fa-arrow-right"></i></button>
+                    <p class="form-note" id="formNote">已收到您的訂位需求，我們將盡快與您聯繫。</p>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top"><a class="brand" href="#home"><span class="brand-mark">燄</span><span
+                        class="brand-text"><strong>燄匠和牛燒肉</strong><small>ENSHO WAGYU YAKINIKU</small></span></a>
+                <div class="socials"><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a
+                        href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#"
+                        aria-label="LINE"><i class="fa-brands fa-line"></i></a></div>
+            </div>
+            <div class="copyright"><span>© 2026 ENSHO YAKINIKU. ALL RIGHTS RESERVED.</span><span>隱私權政策　｜　網站使用條款</span>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const header = document.querySelector('#header'), menuBtn = document.querySelector('#menuBtn'), navLinks = document.querySelector('#navLinks');
+        addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 20)); menuBtn.addEventListener('click', () => { const open = navLinks.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', open); menuBtn.innerHTML = `<i class="fa-solid fa-${open ? 'xmark' : 'bars'}"></i>` }); navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>' }));
+        const slides = [...document.querySelectorAll('.slide')], current = document.querySelector('#current'), progress = document.querySelector('#progress'); let index = 0, timer; function show(i) { index = (i + slides.length) % slides.length; slides.forEach((s, n) => s.classList.toggle('active', n === index)); current.textContent = String(index + 1).padStart(2, '0'); progress.classList.remove('play'); void progress.offsetWidth; progress.classList.add('play'); clearTimeout(timer); timer = setTimeout(() => show(index + 1), 5000) } document.querySelector('#prev').onclick = () => show(index - 1); document.querySelector('#next').onclick = () => show(index + 1); show(0);
+        const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) } }), { threshold: .14 }); document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        const date = document.querySelector('#date'); date.min = new Date().toISOString().split('T')[0]; document.querySelector('#bookingForm').addEventListener('submit', e => { e.preventDefault(); document.querySelector('#formNote').style.display = 'block'; e.target.querySelector('button').textContent = '訂位需求已送出'; });
+    </script>
+</body>
+
+</html>
